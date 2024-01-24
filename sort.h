@@ -20,6 +20,7 @@ typedef struct listint_s
 } listint_t;
 
 void print_list(const listint_t *list);
+void quick_sort_hoare(int *array, size_t size);
 void print_array(const int *array, size_t size);
 void swap_ints(int *a, int *b);
 void bubble_sort(int *array, size_t size);
@@ -42,6 +43,8 @@ void count_sort_LSD(int *array, size_t size, size_t lsd);
 /* Utility functions */
 void swap_ints(int *a, int *b);
 int len_list(listint_t *h);
+int partition(int *array, int left, int right, size_t size);
+void switch_nodes(listint_t **list, listint_t **p);
 int lomuto_partition(int *array, size_t size, int low, int high);
 size_t list_len(listint_t *list);
 void quicksort_recursive(int *array, size_t size, int low, int high);
