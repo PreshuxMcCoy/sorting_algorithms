@@ -1,52 +1,61 @@
 #include "sort.h"
 
 /**
- * swap_nodes - swaps two nodes in a doubly linked list.
- * @head: pointer to a pointer to the head of the linked list.
- * @node1: pointer to the first node to be swapped.
- * @node2: pointer to the second node to be swapped.
+ * len_list - returns the length of a linked list
+ * @h: pointer to the list
+ *
+ * Return: length of list
  */
-
-void swap_nodes(listint_t **head, listint_t **node1, listint_t *node2)
+int len_list(listint_t *h)
 {
-	(*node1)->next = node2->next;
-	if (node2->next != NULL)
-		node2->next->prev = *node1;
-	node2->prev = (*node1)->prev;
-	node2->next = *node1;
-	if ((*node1)->prev != NULL)
-		(*node1)->prev->next = node2;
-	else
-		*head = node2;
-	(*node1)->prev = node2;
-	*node1 = node2->prev;
+	int len = 0;
+
+	while (h)
+	{
+		len++;
+		h = h->next;
+	}
+	return (len);
 }
 
 /**
- * insertion_sort_list - sorts a doubly linked list of integers in
- * ascendind order using the insertion sort algorithm; prints the list
- * after each time the two nodes are swaped
- *
- * @list: a pointer to the head of a doubly-linked list
- *
- * Return: nothing
+ * insertion_sort_list - sorts a linked list with the Insert Sort algorithm
+ * @list: double pointer to the list to sort
  */
-
 void insertion_sort_list(listint_t **list)
 {
-	listint_t *current, *insert, *tmp;
+	listint_t *curr = NULL, *one = NULL;
+	listint_t *two = NULL, *three = NULL, *four = NULL;
 
-	if (list == NULL || *list == NULL || (*list)->next == NULL)
+	if (!list || !(*list) || len_list(*list) < 2)
 		return;
 
-	for (current = (*list)->next; current != NULL; current = tmp)
+	curr = *list;
+
+	while (curr)
 	{
-		tmp = current->next;
-		insert = current->prev;
-		while (insert != NULL && current->n < insert->n)
+		if (curr->prev && curr->n < curr->prev->n)
 		{
-			swap_nodes(list, &insert, current);
-			print_list((const listint_t *)*list);
+			one = curr->prev->prev;
+			two = curr->prev;
+			three = curr;
+			four = curr->next;
+
+			two->next = four;
+			if (four)
+				four->prev = two;
+			three->next = two;
+			three->prev = one;
+			if (one)
+				one->next = three;
+			else
+				*list = three;
+			two->prev = three;
+			curr = *list;
+			print_list(*list);
+			continue;
 		}
+		else
+			curr = curr->next;
 	}
 }

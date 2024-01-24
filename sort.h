@@ -25,6 +25,7 @@ void swap_ints(int *a, int *b);
 void bubble_sort(int *array, size_t size);
 void insertion_sort_list(listint_t **list);
 void selection_sort(int *array, size_t size);
+void quick_recursion(int *array, int left, int right, size_t size);
 void quick_sort(int *array, size_t size);
 void shell_sort(int *array, size_t size);
 void cocktail_sort_list(listint_t **list);
@@ -36,10 +37,13 @@ void bitonic_sort(int *array, size_t size);
 void quick_sort_hoare(int *array, size_t size);
 void heap_sort(int *array, size_t size);
 void radix_sort(int *array, size_t size);
+void count_sort_LSD(int *array, size_t size, size_t lsd);
 
 /* Utility functions */
 void swap_ints(int *a, int *b);
+int len_list(listint_t *h);
 int lomuto_partition(int *array, size_t size, int low, int high);
+size_t list_len(listint_t *list);
 void quicksort_recursive(int *array, size_t size, int low, int high);
 int get_max(int *array, int size);
 void merge_subarray(int *subarray, int *buff, size_t front, size_t mid,
